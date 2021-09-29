@@ -1,7 +1,5 @@
-https://emotion.sh/docs/@emotion/react
-
-
-
+В FF проверить
+Решить проблему с автостартом
 
 https://github.com/remix-run/react-router/issues/3554
 

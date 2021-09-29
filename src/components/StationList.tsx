@@ -1,18 +1,33 @@
 import React from 'react';
 import stations from "../constants/stations";
 import StationItem from "./StationItem";
+import Station from "../types/Station";
+import styled from "@emotion/styled";
+
+const Container = styled.div`
+  color: white;
+  height: 100%;
+  padding: 0 36px;
+  margin-top: 120px;
+`;
+
+const StyledStationItem = styled(StationItem)`
+`
 
 interface StationListProps {
-
+  activeStation: Station,
 }
 
-function StationList(props: StationListProps) {
+function StationList({activeStation}: StationListProps) {
   return (
-    <div className="stationList">
+    <Container>
       {stations.map(s => (
-        <StationItem station={s} className="stationListItem" />
+        <StyledStationItem
+          isActive={s === activeStation}
+          station={s}
+        />
       ))}
-    </div>
+    </Container>
   );
 }
 

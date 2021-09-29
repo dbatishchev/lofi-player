@@ -1,20 +1,42 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import styled from "@emotion/styled";
+import {NavLink} from 'react-router-dom';
 import Station from "../types/Station";
+
+const Container = styled.div`
+  padding: 12px 0;
+`
+
+const StyledNavLink = styled(NavLink)`
+   color: #ccc;
+   text-decoration: none;
+   text-transform: uppercase;
+   font-weight: bold;
+   font-size: 1.2rem;
+   
+   &.${props => props.activeClassName} {
+    color: white;
+  }
+`;
 
 interface StationItemProps {
   station: Station,
-  className: string,
+  className?: string,
+  isActive: boolean,
 }
 
-function StationItem({station, className}: StationItemProps) {
+function StationItem({station, className, isActive}: StationItemProps) {
   return (
-    <div className={className}>
-      <Link to={`/${station.id}`}>
+    <Container className={className}>
+      <StyledNavLink className={className} to={`/${station.slug}`} isActive={() => isActive} activeClassName='active'>
         {station.title}
-      </Link>
-    </div>
+      </StyledNavLink>
+    </Container>
   );
+}
+
+StationItem.defaultProps = {
+  className: '',
 }
 
 export default StationItem;
