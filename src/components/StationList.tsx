@@ -23,6 +23,7 @@ function StationList({activeStation}: StationListProps) {
     <Container>
       {stations.map(s => (
         <StyledStationItem
+          key={s.id}
           isActive={s === activeStation}
           station={s}
         />

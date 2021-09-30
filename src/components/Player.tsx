@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import YouTube from 'react-youtube';
 import Controls from "./Controls";
 import Station from "../types/Station";
@@ -82,6 +82,17 @@ const ControlsContainer = styled.div`
     margin-bottom: 12px;
 `;
 
+const NoPlayOverlay = styled.div`    
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.94);
+  width: 100%;
+  height: 100%;
+`;
+
 interface PlayerProps {
   activeStation: Station,
 }
@@ -90,13 +101,34 @@ function Player({activeStation}: PlayerProps) {
   const playerAPIRef = useRef<any>(null);
 
   const onReady = (event: any) => {
-    playerAPIRef.current = event.target;
+    console.log('ON READY');
+    if (!playerAPIRef.current) {
+      playerAPIRef.current = event.target;
+    }
     event.target.setVolume(100);
   };
 
   const onStateChange = (state: any) => {
     console.log('STATE', state.target.getPlayerState());
-    setIsPlayed(state.target.getPlayerState() === 1);
+
+    const playerState = state.target.getPlayerState();
+    switch (playerState) {
+      case 1:
+        // playing
+        setIsPlaying(true);
+        setIsBuffering(false);
+        break;
+      case 2:
+        // paused
+        // setIsPlaying(false);
+        // setIsBuffering(false);
+        break;
+      case 3:
+        // buffering
+        setIsBuffering(true);
+        break;
+    }
+
     // https://developers.google.com/youtube/iframe_api_reference
   };
 
@@ -114,7 +146,8 @@ function Player({activeStation}: PlayerProps) {
   // );
   const history = useHistory();
   const [volumeLevel, setVolumeLevel] = useState(100);
-  const [isPlayed, setIsPlayed] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.currentTarget.value);
@@ -160,7 +193,7 @@ function Player({activeStation}: PlayerProps) {
   };
 
   const handleTogglePlayClick = () => {
-    setIsPlayed(!isPlayed);
+    setIsPlaying(!isPlaying);
   }
 
   useEffect(() => {
@@ -168,12 +201,20 @@ function Player({activeStation}: PlayerProps) {
       return;
     }
 
-    if (isPlayed) {
+    if (isPlaying === true && isBuffering === false) {
+      console.log('PLAY VUDEO');
       playerAPIRef.current.playVideo();
-    } else {
+    }
+
+    if (isPlaying === false && isBuffering === false) {
+      console.log('NONONO');
       playerAPIRef.current.pauseVideo();
     }
-  }, [isPlayed]);
+
+    // else {
+    //   playerAPIRef.current.pauseVideo();
+    // }
+  }, [isPlaying, isBuffering]);
 
   return (
     <Backdrop>
@@ -199,9 +240,12 @@ function Player({activeStation}: PlayerProps) {
           onReady={onReady}
         />
       </StyledVideo>
+      {isPlaying === false && isBuffering === false && (
+        <NoPlayOverlay />
+      )}
       <ControlsContainer>
         <Controls
-          isPlayed={isPlayed}
+          isPlayed={isPlaying}
           volumeLevel={volumeLevel}
           onVolumeChange={handleVolumeChange}
           onPrevStationClick={handleOpenPrevStationClick}
