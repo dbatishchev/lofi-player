@@ -11,8 +11,9 @@ const StyledNavLink = styled(NavLink)`
    color: #ccc;
    text-decoration: none;
    text-transform: uppercase;
-   font-weight: bold;
+   font-weight: 300;
    font-size: 1.2rem;
+   letter-spacing: 2px;
    
    &.${props => props.activeClassName} {
     color: white;

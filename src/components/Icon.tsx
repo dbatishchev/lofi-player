@@ -7,6 +7,8 @@ import volumeDown from './../assets/icons/volume-down.svg';
 import volumeMute from './../assets/icons/volume-mute.svg';
 import volumeOff from './../assets/icons/volume-off.svg';
 import volumeUp from './../assets/icons/volume-up.svg';
+import spotify from './../assets/icons/spotify.svg';
+import youtube from './../assets/icons/youtube.svg';
 import styled from "@emotion/styled";
 
 export const ICON_NAME_PAUSE = 'pause';
@@ -17,6 +19,8 @@ export const ICON_NAME_VOLUME_DOWN = 'volumeDown';
 export const ICON_NAME_VOLUME_MUTE = 'volumeMute';
 export const ICON_NAME_VOLUME_OFF = 'volumeOff';
 export const ICON_NAME_VOLUME_UP = 'volumeUp';
+export const ICON_NAME_SPOTIFY = 'spotify';
+export const ICON_NAME_YOUTUBE = 'youtube';
 
 const ICON_MAP : { [key: string]: string } = {
   [ICON_NAME_PAUSE]: pause,
@@ -27,6 +31,8 @@ const ICON_MAP : { [key: string]: string } = {
   [ICON_NAME_VOLUME_MUTE]: volumeMute,
   [ICON_NAME_VOLUME_OFF]: volumeOff,
   [ICON_NAME_VOLUME_UP]: volumeUp,
+  [ICON_NAME_SPOTIFY]: spotify,
+  [ICON_NAME_YOUTUBE]: youtube,
 };
 
 const StyledIcon = styled.img`

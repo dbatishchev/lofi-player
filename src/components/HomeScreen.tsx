@@ -4,8 +4,9 @@ import Player from "./Player";
 import StationList from "./StationList";
 import {useParams} from "react-router-dom";
 import stations from "../constants/stations";
+import Info from "./Info";
 
-const StationListContainer = styled.div`
+const Container = styled.div`
     position: absolute;
     z-index: 1;
     top: 0;
@@ -18,6 +19,12 @@ const StationListContainer = styled.div`
     min-height: 100%;
     max-height: 100%;
 `
+
+const InfoContainer = styled.div`
+  position: absolute;
+  bottom: 25%;
+  right: 36px;
+`;
 
 interface HomeScreenProps {
 
@@ -33,9 +40,12 @@ export default function HomeScreen(props: HomeScreenProps) {
   return (
     <div>
       <Player activeStation={activeStation} />
-      <StationListContainer>
+      <Container>
         <StationList activeStation={activeStation} />
-      </StationListContainer>
+        <InfoContainer>
+          <Info activeStation={activeStation} />
+        </InfoContainer>
+      </Container>
     </div>
   );
 }
