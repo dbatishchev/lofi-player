@@ -93,15 +93,14 @@ const NoPlayOverlay = styled.div`
   height: 100%;
 `;
 
-interface PlayerProps {
+type PlayerProps = {
   activeStation: Station,
 }
 
-function Player({activeStation}: PlayerProps) {
+const Player: React.FC<PlayerProps> = ({activeStation}) => {
   const playerAPIRef = useRef<any>(null);
 
   const onReady = (event: any) => {
-    console.log('ON READY');
     if (!playerAPIRef.current) {
       playerAPIRef.current = event.target;
     }
@@ -109,8 +108,6 @@ function Player({activeStation}: PlayerProps) {
   };
 
   const onStateChange = (state: any) => {
-    console.log('STATE', state.target.getPlayerState());
-
     const playerState = state.target.getPlayerState();
     switch (playerState) {
       case 1:
@@ -128,22 +125,12 @@ function Player({activeStation}: PlayerProps) {
         setIsBuffering(true);
         break;
     }
-
-    // https://developers.google.com/youtube/iframe_api_reference
   };
 
   const onError = (err: any) => {
     console.log('ERR', err);
   }
 
-  // https://dev.to/bravemaster619/simplest-way-to-embed-a-youtube-video-in-your-react-app-3bk2
-  //
-  // return (
-  //   <iframe id="youtube-player" className="unselectable" frameBorder="0" allowFullScreen="1"
-  //           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  //           title="YouTube video player" width="640" height="360"
-  //           src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&amp;controls=0&amp;modestbranding=1&amp;disablekb=1&amp;iv_load_policy=3&amp;playsinline=1&amp;origin=https%3A%2F%2Flofimusic.app&amp;enablejsapi=1&amp;widgetid=1"></iframe>
-  // );
   const history = useHistory();
   const [volumeLevel, setVolumeLevel] = useState(100);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -201,13 +188,11 @@ function Player({activeStation}: PlayerProps) {
       return;
     }
 
-    if (isPlaying === true && isBuffering === false) {
-      console.log('PLAY VUDEO');
+    if (isPlaying && !isBuffering) {
       playerAPIRef.current.playVideo();
     }
 
-    if (isPlaying === false && isBuffering === false) {
-      console.log('NONONO');
+    if (!isPlaying && !isBuffering) {
       playerAPIRef.current.pauseVideo();
     }
 
@@ -240,7 +225,7 @@ function Player({activeStation}: PlayerProps) {
           onReady={onReady}
         />
       </StyledVideo>
-      {isPlaying === false && isBuffering === false && (
+      {!isPlaying && !isBuffering && (
         <NoPlayOverlay />
       )}
       <ControlsContainer>

@@ -20,13 +20,13 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-interface StationItemProps {
+type StationItemProps = {
   station: Station,
   className?: string,
   isActive: boolean,
 }
 
-function StationItem({station, className, isActive}: StationItemProps) {
+const StationItem: React.FC<StationItemProps> = ({station, className, isActive}) => {
   return (
     <Container className={className}>
       <StyledNavLink className={className} to={`/${station.slug}`} isActive={() => isActive} activeClassName='active'>

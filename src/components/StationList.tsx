@@ -14,11 +14,11 @@ const Container = styled.div`
 const StyledStationItem = styled(StationItem)`
 `
 
-interface StationListProps {
+type StationListProps = {
   activeStation: Station,
 }
 
-function StationList({activeStation}: StationListProps) {
+const StationList: React.FC<StationListProps> = ({activeStation}: StationListProps) => {
   return (
     <Container>
       {stations.map(s => (

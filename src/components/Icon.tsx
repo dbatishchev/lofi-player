@@ -39,12 +39,12 @@ const StyledIcon = styled.img`
   filter: invert(100%) sepia(1%) saturate(3740%) hue-rotate(328deg) brightness(128%) contrast(91%);
 `;
 
-interface IconProps {
+type IconProps = {
   name: string,
   className?: string,
 }
 
-function Icon({className, name}: IconProps) {
+const Icon: React.FC<IconProps> = ({className, name}) => {
   return (
     <StyledIcon
       className={className}

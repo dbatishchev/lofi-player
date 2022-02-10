@@ -54,13 +54,13 @@ const StyledRangeInput = styled.input`
   }
 `
 
-interface VolumeProps {
+type VolumeProps = {
   className?: string,
   value: number,
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-}
+};
 
-function Volume({className = '', value, onChange}: VolumeProps) {
+const Volume: React.FC<VolumeProps> = ({className = '', value, onChange}) => {
   return (
     <StyledRangeInput
       className={className}

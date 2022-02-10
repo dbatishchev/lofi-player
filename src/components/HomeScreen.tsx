@@ -26,11 +26,11 @@ const InfoContainer = styled.div`
   right: 36px;
 `;
 
-interface HomeScreenProps {
+type HomeScreenProps = {
 
 }
 
-export default function HomeScreen(props: HomeScreenProps) {
+const HomeScreen: React.FC<HomeScreenProps> = ({}) => {
   const { slug } = useParams<{ slug: string }>();
   const activeStation = useMemo(() => {
     const station = stations.find(s => s.slug === slug);
@@ -49,3 +49,5 @@ export default function HomeScreen(props: HomeScreenProps) {
     </div>
   );
 }
+
+export default HomeScreen;

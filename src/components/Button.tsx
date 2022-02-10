@@ -19,13 +19,13 @@ const StyledButton = styled.button<{ size: string }>`
   }
 `
 
-interface ButtonProps {
+type ButtonProps = {
   size?: string
   children: React.ReactNode,
   onClick?: (event: React.MouseEvent) => void,
 }
 
-function Button({size = 'md', children, onClick}: ButtonProps) {
+const Button: React.FC<ButtonProps> = ({size = 'md', children, onClick}) => {
   return (
     <StyledButton size={size} onClick={onClick}>
       {children}

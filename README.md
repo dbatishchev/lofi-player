@@ -1,7 +1,3 @@
-https://lofi-chill-beats.netlify.app/sakura
+[demo page](https://lofi-chill-beats.netlify.app/)
 
-isPlayed -> isPlaying
-В FF проверить
-Выводить название радиостанции
-Выводить ссылку на youtube
-Выводить ссылку на spotify
+![Details](./docs/screen-01.png)

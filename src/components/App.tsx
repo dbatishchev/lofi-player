@@ -22,7 +22,7 @@ const globalStyles = css`
   }
 `;
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <Global styles={globalStyles} />

@@ -30,11 +30,11 @@ const IconsList = styled.div`
   }
 `
 
-interface InfoProps {
+type InfoProps = {
   activeStation: Station,
 }
 
-function Info({activeStation}: InfoProps) {
+const Info: React.FC<InfoProps> = ({activeStation}) => {
   return (
     <StyledInfo>
       <h1>{activeStation.title}</h1>

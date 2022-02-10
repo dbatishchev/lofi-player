@@ -22,7 +22,7 @@ const StyledVolume = styled(Volume)`
   width: 160px;
 `
 
-interface ControlsProps {
+type ControlsProps = {
   isPlayed: boolean,
   volumeLevel: number,
   onVolumeChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -32,7 +32,7 @@ interface ControlsProps {
   onTogglePlayClick: () => void,
 }
 
-function Controls({isPlayed, volumeLevel, onVolumeChange, onPrevStationClick, onNextStationClick, onToggleVolumeClick, onTogglePlayClick}: ControlsProps) {
+const Controls: React.FC<ControlsProps> = ({isPlayed, volumeLevel, onVolumeChange, onPrevStationClick, onNextStationClick, onToggleVolumeClick, onTogglePlayClick}) => {
   let volumeIcon = ICON_NAME_VOLUME_UP;
 
   if (volumeLevel < 60) {

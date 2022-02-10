@@ -43,8 +43,4 @@ const stations: Station[] = [
   },
 ];
 
-
-
-
-
 export default stations;
