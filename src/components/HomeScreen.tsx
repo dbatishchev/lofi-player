@@ -30,7 +30,7 @@ type HomeScreenProps = {
 
 }
 
-const HomeScreen: React.FC<HomeScreenProps> = ({}) => {
+const HomeScreen: React.FC<HomeScreenProps> = () => {
   const { slug } = useParams<{ slug: string }>();
   const activeStation = useMemo(() => {
     const station = stations.find(s => s.slug === slug);
